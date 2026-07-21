@@ -1,0 +1,28 @@
+.hero {
+
+    padding: 80px 20px;
+    background: #f8f9fa;
+
+}
+
+
+.hero h1 {
+
+    font-size: 45px;
+    font-weight: bold;
+
+}
+
+
+.card {
+
+    transition: 0.3s;
+
+}
+
+
+.card:hover {
+
+    transform: translateY(-5px);
+
+}
