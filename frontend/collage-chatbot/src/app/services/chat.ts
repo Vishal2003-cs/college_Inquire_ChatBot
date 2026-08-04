@@ -1,21 +1,22 @@
-/*import { Service } from '@angular/core';
-
-@Service()
-export class Chat {}*/
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
-  getAiReply(sms:string){
-    if(sms.toLocaleLowerCase().includes("admission")){
-      return "You can aapply through university admission portal.";
-    }
-    if(sms.toLocaleLowerCase().includes("course")){
-      return "You can check the available courses on our website.";
-    }
-    return "Thank you for your question. We will get back to you shortly.";
 
+  private apiUrl = 'http://localhost:3000/chat';
+
+  constructor(private http: HttpClient) {}
+
+  getAiReply(sms: string) {
+    return this.http.post<{ reply: string }>(
+      this.apiUrl,
+      {
+        message: sms
+      }
+    );
   }
+
 }

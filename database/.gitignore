@@ -1,0 +1,15 @@
+# Node modules
+node_modules/
+**/node_modules/
+
+# Environment files
+.env
+**/.env
+
+# Angular cache
+.angular/
+**/.angular/
+
+# Firebase key
+firebase-service-account.json
+**/firebase-service-account.json

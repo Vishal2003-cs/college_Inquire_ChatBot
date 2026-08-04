@@ -1,4 +1,4 @@
-import { NgClass, NgIf } from '@angular/common';
+import { NgClass, NgIf ,NgFor} from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {ChatService} from '../../services/chat';
@@ -11,7 +11,7 @@ interface Chatmessage {
 @Component({
   selector: 'app-chat',
   standalone: true,
-  imports: [FormsModule, NgClass, NgIf],
+  imports: [FormsModule, NgClass, NgIf, NgFor],
   templateUrl: './chat.html',
   styleUrls: ['./chat.css'],
 })
@@ -34,14 +34,26 @@ export class Chat {
   });
   this.User_text="";
   this.isTyping=true;
-  setTimeout(() => {
-    let reply = this.chatService.getAiReply(userMessage);
-    this.message.push({
-      sender: "AI",
-      text: reply
-    });
-    this.isTyping=false;
-  }, 1000);
+  this.chatService.getAiReply(userMessage).subscribe({
+    next: (response) => {
+        this.message.push({
+            sender: "AI",
+            text: response.reply
+        });
+
+        this.isTyping = false;
+    },
+    error: (error) => {
+        console.error(error);
+
+        this.message.push({
+            sender: "AI",
+            text: "Server Error"
+        });
+
+        this.isTyping = false;
+    }
+});
 
  }
 }
