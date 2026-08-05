@@ -1,5 +1,5 @@
 //const db = require("./firebase");
-
+const Faq = require("./models/Faq");
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
@@ -28,9 +28,60 @@ app.post("/chat",async (req, res) => {
     //-----------------------------------------------
       try {
         const userMessage = req.body.message;
-        const courses = await Course.find();
-        const courseList = JSON.stringify(courses, null, 2);
-        console.log(courses);
+        const message = userMessage.toLowerCase();
+        //-------------------
+        let faqContext = "";
+        let courseContext = "";
+        //------------------
+        if (
+                message.includes("course") ||
+                message.includes("courses") ||
+                message.includes("program") ||
+                message.includes("degree")
+            ) {
+
+                const courses = await Course.find();
+
+                courseContext = courses.map(course =>
+
+            `Course: ${course.courseName}
+            Department: ${course.department}
+            Duration: ${course.duration}
+            Faculty: ${course.faculty}
+            Description: ${course.description}
+
+       `).join("\n");
+
+              console.log("Courses Loaded:", courses.length);
+
+        }
+        //----------------FAQ------------
+        if (
+            message.includes("apply") ||
+            message.includes("contact") ||
+            message.includes("office") ||
+            message.includes("library") ||
+            message.includes("location")
+        ) {
+
+            const faqs = await Faq.find();
+
+            faqContext = faqs.map(faq =>
+
+        `Question: ${faq.question}
+        Answer: ${faq.answer}
+
+        `).join("\n");
+
+            console.log("FAQs Loaded:", faqs.length);
+
+        }
+    
+
+
+        //---better terminal data
+        //console.log(courses);
+        //console.log("Courses:", courses.length);
         console.log("Received message:", userMessage);
 
         const interaction = await ai.interactions.create({
@@ -52,7 +103,7 @@ app.post("/chat",async (req, res) => {
 
                 The following courses exist in the database.
 
-                ${courseList}
+                ${courseContext}
 
                 When students ask about courses:
 
@@ -60,7 +111,9 @@ app.post("/chat",async (req, res) => {
                 - Present them as a clean numbered list.
                 - Do not use markdown symbols like **.
                 - Mention department and duration.
+                Database Information:
 
+                ${faqContext}
                 Student Question:
 
                 ${userMessage}
