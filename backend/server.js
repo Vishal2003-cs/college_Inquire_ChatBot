@@ -1,10 +1,13 @@
 //const db = require("./firebase");
-const Faq = require("./models/Faq");
+
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 const connectMongoDB = require("./mongodb");
+const Faq = require("./models/Faq");
 const Course = require("./models/Course");
+const Staff = require("./models/Staff");
+const Department = require("./models/Department");
 const app = express();
 connectMongoDB();
 const{ GoogleGenAI}= require("@google/genai");
@@ -32,6 +35,8 @@ app.post("/chat",async (req, res) => {
         //-------------------
         let faqContext = "";
         let courseContext = "";
+        let staffContext = "";
+        let departmentContext = "";
         //------------------
         if (
                 message.includes("course") ||
@@ -76,7 +81,56 @@ app.post("/chat",async (req, res) => {
             console.log("FAQs Loaded:", faqs.length);
 
         }
-    
+        //---------------staff------------
+        if (
+
+        message.includes("staff") ||
+        message.includes("lecturer") ||
+        message.includes("teacher") ||
+        message.includes("hod") ||
+        message.includes("head")
+
+        ) {
+
+            const staffs = await Staff.find();
+
+            staffContext = staffs.map(staff =>
+
+        `Name: ${staff.name}
+        Email: ${staff.email}
+        Staff ID: ${staff.staffId}
+        Department: ${staff.department}
+
+        `).join("\n");
+
+            console.log("Staff Loaded:", staffs.length);
+
+        }
+        //----------------department------------
+                if (
+
+        message.includes("department") ||
+        message.includes("dean") ||
+        message.includes("hod") ||
+        message.includes("head")
+
+        ) {
+
+            const departments = await Department.find();
+
+            departmentContext = departments.map(department =>
+
+        `Name: ${department.departmentName}
+        Faculty: ${department.faculty}
+        Description: ${department.description}
+        Email: ${department.email}
+        Phone: ${department.phone}
+
+        `).join("\n");
+
+           console.log("Departments Loaded:", departments.length);
+
+        }
 
 
         //---better terminal data
@@ -114,6 +168,8 @@ app.post("/chat",async (req, res) => {
                 Database Information:
 
                 ${faqContext}
+                ${staffContext}
+                ${departmentContext}
                 Student Question:
 
                 ${userMessage}
