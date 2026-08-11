@@ -1,0 +1,112 @@
+.contact-page {
+    padding: 30px 15px 60px;
+}
+.contact-header {
+    padding: 45px 20px;
+    background: #f8f9fa;
+    border-radius: 15px;
+    margin-bottom: 50px;
+}
+
+.contact-icon {
+    font-size: 50px;
+    color: black;
+    margin-bottom: 15px;
+}
+
+.contact-header h1 {
+    font-size: 38px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.contact-header p {
+    color: #6c757d;
+    margin: 0;
+}
+
+
+
+
+.contact-info {
+    padding: 25px;
+}
+
+.contact-info h2,
+.contact-form h2 {
+    margin-bottom: 15px;
+}
+
+.contact-info > p {
+    color: #6c757d;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.contact-item > i {
+    font-size: 24px;
+    color: black;
+    margin-top: 3px;
+}
+
+.contact-item h5 {
+    margin-bottom: 4px;
+}
+
+.contact-item p {
+    color: #6c757d;
+    margin: 0;
+}
+
+
+.contact-form {
+    background: white;
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    padding: 30px;
+}
+
+.form-description {
+    color: #6c757d;
+    margin-bottom: 25px;
+}
+
+.form-control {
+    padding: 10px 12px;
+}
+
+.form-control:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.15);
+}
+
+.contact-form .btn {
+    padding: 10px 20px;
+}
+
+
+
+@media (max-width: 768px) {
+
+    .contact-header h1 {
+        font-size: 30px;
+    }
+
+    .contact-info {
+        padding: 10px;
+    }
+
+    .contact-form {
+        padding: 20px;
+    }
+
+}
