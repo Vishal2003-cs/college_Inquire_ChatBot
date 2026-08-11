@@ -1,3 +1,4 @@
+```html
 <!doctype html>
 <html lang="en">
 <head>
@@ -6,8 +7,51 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="CollageChatbot — an AI-powered chatbot that helps you create and organize collages.">
+  <meta name="keywords" content="collage, chatbot, AI, image editor, photo collage">
+  <meta name="author" content="Your Name or Company">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.yourdomain.com/">
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="CollageChatbot">
+  <meta property="og:description" content="An AI-powered chatbot that helps you create and organize collages.">
+  <meta property="og:image" content="https://www.yourdomain.com/assets/og-image.png">
+  <meta property="og:url" content="https://www.yourdomain.com/">
+  <meta property="og:site_name" content="CollageChatbot">
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CollageChatbot">
+  <meta name="twitter:description" content="An AI-powered chatbot that helps you create and organize collages.">
+  <meta name="twitter:image" content="https://www.yourdomain.com/assets/og-image.png">
+
+  <!-- External Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Google Analytics -->
+  <!-- Replace G-XXXXXXXXXX with your actual Measurement ID -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
 </head>
+
 <body>
   <app-root></app-root>
 </body>
 </html>
+```
