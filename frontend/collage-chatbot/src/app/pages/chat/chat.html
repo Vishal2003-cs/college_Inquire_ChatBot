@@ -29,22 +29,32 @@
         *ngFor="let msg of message"
         [ngClass]="msg.sender">
 
-        <div class="avatar">
-          <span *ngIf="msg.sender === 'AI'">🤖</span>
-          <span *ngIf="msg.sender === 'user'">👤</span>
+        <!-- Sender label -->
+        <div class="sender-label">
+          {{ msg.sender === 'user' ? 'You' : 'AI Assistant' }}
         </div>
-        <div class="bubble">
-          {{ msg.text }}
+
+        <div class="message-row" [ngClass]="msg.sender">
+          <div class="avatar">
+            <span *ngIf="msg.sender === 'AI'">🤖</span>
+            <span *ngIf="msg.sender === 'user'">👤</span>
+          </div>
+          <div class="bubble">
+            {{ msg.text }}
+          </div>
         </div>
       </div>
 
       <!-- AI typing indicator -->
       <div class="message AI" *ngIf="isTyping">
-        <div class="avatar">🤖</div>
-        <div class="bubble typing-bubble">
-          <span class="dot"></span>
-          <span class="dot"></span>
-          <span class="dot"></span>
+        <div class="sender-label">AI Assistant</div>
+        <div class="message-row AI">
+          <div class="avatar">🤖</div>
+          <div class="bubble typing-bubble">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
         </div>
       </div>
 
