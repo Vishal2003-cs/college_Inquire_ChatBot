@@ -1,98 +1,70 @@
-<p>chat works!</p>
 <div class="chat-page">
-
   <div class="container">
-
     <!-- Chat Header -->
     <div class="chat-header text-center">
-      <h1>AI College Assistant</h1>
-      <div class = "status">
-          🟢 Online
+      <div class="header-top">
+        <div class="bot-icon">🎓</div>
+        <div>
+          <h1>AI College Assistant</h1>
+          <div class="status">
+            <span class="status-dot"></span>
+            Online
+          </div>
+        </div>
       </div>
-      <p>
-        Ask anything about our college
-      </p>
+      <p>Ask anything about our college — admissions, courses, fees & more</p>
     </div>
-
 
     <!-- Chat Box -->
     <div class="chat-box shadow">
-        <div
-            class ="message"
-            *ngFor ="let msg of message"
-            [ngClass] ="msg.sender">
-              
-              <div class ="avatar">
-              <span *ngIf="msg.sender === 'AI'">🤖</span>
-              <span *ngIf="msg.sender === 'user'">👤</span>
-              </div>
 
-              <div class ="bubble">
-             
-                {{msg.text}}
-              </div>
-            
-        </div>
-        <!--Ai typing part-->
-        <div class ="message AI"
-             *ngIf = "isTyping">
-              <div class ="avatar">
-                🤖
-              </div>
-              <div class ="bubble">
-                AI is Typing...
-              </div>
-        </div>
+      <!-- Empty state -->
+      <div class="empty-state" *ngIf="message.length === 0 && !isTyping">
+        <div class="empty-icon">💬</div>
+        <p>Start a conversation with your AI Assistant</p>
+      </div>
 
-      <!-- Bot Message 
-      <div class="message bot">
+      <div
+        class="message"
+        *ngFor="let msg of message"
+        [ngClass]="msg.sender">
+
+        <div class="avatar">
+          <span *ngIf="msg.sender === 'AI'">🤖</span>
+          <span *ngIf="msg.sender === 'user'">👤</span>
+        </div>
         <div class="bubble">
-          Hello 👋  
-          I am your AI College Assistant.
-          How can I help you today?
+          {{ msg.text }}
         </div>
       </div>
 
-
-       User Message 
-      <div class="message user">
-        <div class="bubble">
-          Tell me about Software Engineering.
+      <!-- AI typing indicator -->
+      <div class="message AI" *ngIf="isTyping">
+        <div class="avatar">🤖</div>
+        <div class="bubble typing-bubble">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
         </div>
       </div>
-
-
-       Bot Reply 
-      <div class="message bot">
-        <div class="bubble">
-          Software Engineering is a degree program
-          focused on designing and developing software systems.
-        </div>
-      </div>-->
-
 
     </div>
-
 
     <!-- Input Area -->
     <div class="input-area">
-
-      <input 
+      <input
         type="text"
         class="form-control"
-        placeholder="Type question Here...."
+        placeholder="Type your question here..."
         [(ngModel)]="User_text"
         (keydown.enter)="send_text()"
       >
-
-
-      <button class="btn btn-primary" (click)="send_text()">
-        ➤
+      <button
+        class="btn btn-primary send-btn"
+        (click)="send_text()"
+        [disabled]="!User_text.trim()">
+        <span>➤</span>
       </button>
-
     </div>
-
-
   </div>
-
 </div>
